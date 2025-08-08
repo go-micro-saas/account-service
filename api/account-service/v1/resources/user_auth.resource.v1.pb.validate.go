@@ -36,7 +36,7 @@ var (
 	_ = anypb.Any{}
 	_ = sort.Sort
 
-	_ = enumv1.UserGenderEnum_UserGender(0)
+	_ = enumv1.UserStatusEnum_UserStatus(0)
 )
 
 // Validate checks the field values on PingReq with the rules defined in the
@@ -403,6 +403,8 @@ func (m *UserInfo) validate(all bool) error {
 	// no validation rules for UserNickname
 
 	// no validation rules for UserAvatar
+
+	// no validation rules for UserStatus
 
 	if len(errors) > 0 {
 		return UserInfoMultiError(errors)

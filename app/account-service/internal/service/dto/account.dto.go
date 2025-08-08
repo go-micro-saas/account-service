@@ -14,16 +14,21 @@ var (
 
 type accountDto struct{}
 
+func (s *accountDto) ToPbUserInfo(userModel *po.User) *resourcev1.UserInfo {
+	res := &resourcev1.UserInfo{
+		// Id:           userModel.Id,
+		UserId:       userModel.UserId,
+		UserNickname: userModel.UserNickname,
+		UserAvatar:   userModel.UserAvatar,
+		UserStatus:   userModel.UserStatus,
+		// UserGender:   userModel.UserGender,
+	}
+	return res
+}
+
 func (s *accountDto) ToPbLoginRespData(userModel *po.User, tokenResp *bo.SignTokenResp) *resourcev1.LoginRespData {
 	res := &resourcev1.LoginRespData{
-		UserInfo: &resourcev1.UserInfo{
-			// Id:           userModel.Id,
-			UserId:       userModel.UserId,
-			UserNickname: userModel.UserNickname,
-			UserAvatar:   userModel.UserAvatar,
-			// UserGender:   userModel.UserGender,
-			// UserStatus:   userModel.UserStatus,
-		},
+		UserInfo:              s.ToPbUserInfo(userModel),
 		AccessToken:           tokenResp.AccessToken,
 		AccessTokenExpiredAt:  tokenResp.AccessTokenItem.ExpiredAt,
 		RefreshToken:          tokenResp.RefreshToken,
